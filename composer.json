@@ -1,0 +1,14 @@
+{
+    "name": "alexander/onesignalapilaravel",
+    "description": "Sample package for laravel",
+    "type": "library",
+    "license": "alexandrbakhmach",
+    "authors": [
+        {
+            "name": "Alexandr Bakhmach",
+            "email": "alexandrbakhmach@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {}
+}
