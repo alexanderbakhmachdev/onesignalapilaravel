@@ -1,5 +1,5 @@
 {
-    "name": "alexander/onesignalapilaravel",
+    "name": "alexanderdev/onesignalapilaravel",
     "description": "Sample package for laravel",
     "type": "library",
     "license": "alexandrbakhmach",
@@ -10,5 +10,10 @@
         }
     ],
     "minimum-stability": "stable",
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Alexander\\": "src/"
+        }
+    }
 }
