@@ -9,6 +9,22 @@ Execute that command in linux terminal
 composer require alexanderdev/onesignalapilaravel dev-master
 ```
 
+then add to main composer.json dependency to guzzle
+```sh
+...
+"require": {
+        
+        ...
+        
+        "guzzlehttp/guzzle": "~6.0",
+        
+        ...
+        
+    },
+...
+```
+
+
 then after adding 
 
 ```sh
