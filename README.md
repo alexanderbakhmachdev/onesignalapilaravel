@@ -40,7 +40,20 @@ Finally from the command line
     $ php artisan config:cache
     $ php artisan vendor:publish --tag=config
 ```
-
+## Configuration
+All necessary config to successfully start using this package
+pasted in onesignal.php located in /config
+Example of configuration
+```sh
+    <?php
+        return [
+        
+            'api_url' => 'https://onesignal.com/api/v1/notifications',
+            'rest_api_key' => 'MTU4NjQ0NGQtMGQ4Yy00MmQzLTk2NDUtZjVlODg2YmQxZTRm',
+            'rest_signal_api_id' => 'd1b6ce9b-da0c-493b-98c0-e9d14d8b4135'
+        ];
+```
+    
 ## Usage
 
 This is an example of how to sent push notification via laravel controller:
