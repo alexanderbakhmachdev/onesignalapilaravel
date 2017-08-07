@@ -25,7 +25,7 @@ class OneSignalServiceProvider extends ServiceProvider
     {
         $this->app->bind('notification', function($app)
         {
-            OneSignalNotification::createInstance();
+            return OneSignalNotification::createInstance();
         });
     }
 }

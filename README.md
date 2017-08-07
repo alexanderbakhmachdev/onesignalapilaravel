@@ -9,20 +9,36 @@ Execute that command in linux terminal
 composer require alexanderdev/onesignalapilaravel dev-master
 ```
 
-
-
-
-Then you must to add usage 
+Add provider
 
 ```sh
-use Alexander\OneSignalApiLaravel\OneSignalNotification;
+'providers' => [
+        
+        ...
+        
+        Alexander\OneSignalApiLaravel\OneSignalServiceProvider::class,
+        
+        ...
+
+]
 ```
 
+Add facade
+```sh
+'aliases' => [
+
+        ...
+        
+        'OneSignal' => Alexander\OneSignalApiLaravel\Facade\OneSignalFacade::class,
+        
+        ...
+        
+```
 
 ## Usage
 
 This is an example of how to sent push notification via laravel controller:
 
 ```sh
-$response = OneSignalNotification::createInstance()->addContent('en' , 'My message')->forActiveUsers()->sentPost();
+$response = OneSignal::forActiveUsers()->addContent('en', 'It`s work')->sentPost();
 ```

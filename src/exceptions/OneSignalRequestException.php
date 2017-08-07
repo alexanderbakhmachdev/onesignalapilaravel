@@ -1,9 +1,9 @@
 <?php
-namespace Alexander\OneSignalApiLaravel;
+namespace Alexander\OneSignalApiLaravel\Exceptions;
 
 use Exception;
 
-class OneSignalRequestException extends OneSignalException
+class OneSignalRequestException extends Exception
 {
 
 }
