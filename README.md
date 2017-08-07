@@ -49,8 +49,8 @@ Example of configuration
         return [
         
             'api_url' => 'https://onesignal.com/api/v1/notifications',
-            'rest_api_key' => 'MTU4NjQ0NGQtMGQ4Yy00MmQzLTk2NDUtZjVlODg2YmQxZTRm',
-            'rest_signal_api_id' => 'd1b6ce9b-da0c-493b-98c0-e9d14d8b4135'
+            'rest_api_key' => 'MTU4NjQ0NGYtMGQ4Yy00MmQzLTk2NDUtZjVlODg2YmQxZTRm',
+            'rest_signal_api_id' => 'd1b6ct9b-da0c-493b-98c0-e9d14d8b4135'
         ];
 ```
     
