@@ -35,6 +35,12 @@ Add facade
         
 ```
 
+Finally from the command line
+```sh
+    $ php artisan config:cache
+    $ php artisan vendor:publish --tag=config
+```
+
 ## Usage
 
 This is an example of how to sent push notification via laravel controller:

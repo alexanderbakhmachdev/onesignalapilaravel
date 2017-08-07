@@ -13,11 +13,17 @@ use GuzzleHttp\Exception\TransferException;
 class OneSignalNotification
 {
 
+    private $_REGEXP_URL = '/^(http|https):\\/\\/[a-z0-9_]+([\\-\\.]{1}[a-z_0-9]+)*\\.[_a-z]{2,5}'.'((:[0-9]{1,5})?\\/.*)?$/i';
+
     private $restApiKey;
 
     private $oneSignalAppId;
 
-    private $apiUrl;
+    public function getApiUrl(){
+        return $this->apiUrl;
+    }
+
+    public $apiUrl;
 
     protected $client;
     /**
@@ -42,11 +48,12 @@ class OneSignalNotification
         $this->client = new Client();
         $this->headers = [
             'Content-Type' => 'application/json; charset=utf-8',
-            'Authorization' => 'Basic' . ' ' . Config::$_REST_API_KEY
+            'Authorization' => 'Basic' . ' ' . $this->restApiKey
         ];
         $this->data['included_segments'] = [];
         $this->data['contents'] = [];
-        $this->data['app_id'] = Config::$_ONE_SIGNAL_APP_ID;
+        $this->data['app_id'] = $this->oneSignalAppId;
+        $this->data['filters'] = [];
         array_merge($this->data, $addData);
     }
 
@@ -126,8 +133,11 @@ class OneSignalNotification
     }
 
     public function sentPost(){
+        if(!preg_match( $this->_REGEXP_URL ,$this->apiUrl)){
+            throw new OneSignalException("Not valid url");
+        }
         try {
-            return $this->client->post(Config::$_API_URL, [
+            return $this->client->post($this->apiUrl, [
                 'headers' => $this->headers,
                 'body' => $this->getDataByJson()
             ]);

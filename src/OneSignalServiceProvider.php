@@ -13,7 +13,12 @@ class OneSignalServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-
+        $configPath = __DIR__ . '/../config/onesignal.php';
+        $this->publishes([$configPath => config_path('onesignal.php')], 'config');
+        $this->mergeConfigFrom($configPath, 'onesignal');
+        if ( class_exists('Laravel\Lumen\Application') ) {
+            $this->app->configure('onesignal');
+        }
     }
 
     /**
@@ -23,9 +28,12 @@ class OneSignalServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->bind('notification', function($app)
-        {
-            return OneSignalNotification::createInstance();
+        $this->app->bind('notification', function($app){
+            $config = isset($app['config']['services']['onesignal']) ? $app['config']['services']['onesignal'] : null;
+            if (is_null($config)) {
+                $config = $app['config']['onesignal'] ?: $app['config']['onesignal::config'];
+            }
+            return OneSignalNotification::createInstance()->withConfig($config);
         });
     }
 }
