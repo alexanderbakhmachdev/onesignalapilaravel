@@ -9,29 +9,15 @@ Execute that command in linux terminal
 composer require alexanderdev/onesignalapilaravel dev-master
 ```
 
-then add to main composer.json dependency to guzzle
-```sh
-...
-"require": {
-        
-        ...
-        
-        "guzzlehttp/guzzle": "~6.0",
-        
-        ...
-        
-    },
-...
-```
 
 
-then after adding 
+
+Then you must to add usage 
 
 ```sh
 use Alexander\OneSignalApiLaravel\OneSignalNotification;
 ```
 
-use OneSignalNotification class to sent notifications
 
 ## Usage
 
