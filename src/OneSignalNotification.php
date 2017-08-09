@@ -45,6 +45,7 @@ class OneSignalNotification
         $this->data['included_segments'] = [];
         $this->data['contents'] = [];
         $this->data['filters'] = [];
+        $this->data['include_player_ids'] = array();
         array_merge($this->data, $addData);
     }
 
@@ -95,6 +96,15 @@ class OneSignalNotification
         return $this;
     }
 
+    /**
+     * @param $userId
+     * @return $this
+     * Add userId to the array og users id in notification
+     */
+    public function addUser($userId){
+        array_push($this->data['include_player_ids'], $userId);
+        return $this;
+    }
 
     /**
      * @param $url
@@ -119,6 +129,25 @@ class OneSignalNotification
         return $this;
     }
 
+    /**
+     * @param $contents
+     * @return $this
+     * Add messages as array
+     */
+    public function addContents($contents){
+        $this->data['contents'] = $contents;
+        return $this;
+    }
+
+    /**
+     * @param $time
+     * @return $this
+     * Add the time when user will be receive the notification
+     */
+    public function addDeliveryTime($time){
+        $this->data['delivery_time_of_day'] = $time;
+        return $this;
+    }
 
     /**
      * @return string
@@ -128,6 +157,11 @@ class OneSignalNotification
         return json_encode($this->data);
     }
 
+    /**
+     * @return null|\Psr\Http\Message\ResponseInterface
+     * @throws OneSignalException
+     * @throws OneSignalRequestException
+     */
     public function sentPost(){
         if(!preg_match( $this->_REGEXP_URL ,$this->apiUrl)){
             throw new OneSignalException("Not valid url");
@@ -139,8 +173,9 @@ class OneSignalNotification
             ]);
         }catch (RequestException $e){
             if ($e->hasResponse()) {
-                $exception = new OneSignalException($e->getMessage());
-                $exception->errorMessages = json_decode($e->getResponse()->getBody(), true)['errors'];
+                $errors = json_decode($e->getResponse()->getBody(), true)['errors'];
+                $exception = new OneSignalException($errors[0]);
+                $exception->errorMessages = $errors;
                 throw $exception;
             }
         }catch (TransferException $e){
