@@ -3,16 +3,9 @@
 namespace Alexander\OneSignalApiLaravel;
 
 
-use Alexander\OneSignalApiLaravel\Exceptions\OneSignalException;
-use Alexander\OneSignalApiLaravel\Exceptions\OneSignalRequestException;
-use AndroidNotification;
-use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Exception\TransferException;
-use IosNotification;
-use Notification;
-use WebNotification;
-
+use Alexander\OneSignalApiLaravel\Notifications\AndroidNotification;
+use Alexander\OneSignalApiLaravel\Notifications\IosNotification;
+use Alexander\OneSignalApiLaravel\Notifications\WebNotification;
 
 abstract class NotificationFactory
 {
