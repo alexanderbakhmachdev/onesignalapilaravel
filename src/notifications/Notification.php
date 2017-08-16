@@ -115,6 +115,54 @@ abstract class Notification
         return $this;
     }
 
+    public function addHeadings($headings){
+        $this->data['headings'] = $headings;
+        return $this;
+    }
+
+    public function addHeading($language, $heading){
+        $this->data['headings'][$language] = $heading;
+        return $this;
+    }
+
+    public function addTemplateId($id){
+        $this->data['template_id'] = $id;
+        return $this;
+    }
+
+    public function addData($data){
+        $this->data['data'] = $data;
+        return $this;
+    }
+
+    public function addSingleData($key, $value){
+        $this->data['data'][$key] = $value;
+        return $this;
+    }
+
+    public function addButtons(){
+        //TODO: add buttond
+        return $this;
+    }
+
+    public function addAfterSend($date){
+        $this->data['send_after'] = $date;
+        return $this;
+    }
+
+
+    public function addDelayedOptionTimeZone($timeZone){
+        $this->data['delayed_option']['timezone'] = $timeZone;
+        return $this;
+    }
+
+    public function addDelayedOptionLastActive($lastActive){
+        $this->data['delayed_option']['last_active'] = $lastActive;
+        return $this;
+    }
+
+
+
     /**
      * @return string
      * Get json representation of notification data
