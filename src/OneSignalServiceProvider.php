@@ -33,7 +33,7 @@ class OneSignalServiceProvider extends ServiceProvider
             if (is_null($config)) {
                 $config = $app['config']['onesignal'] ?: $app['config']['onesignal::config'];
             }
-            return OneSignalNotification::createInstance()->withConfig($config);
+            return NotificationFactory::getNotification('android')->withConfig($config);
         });
     }
 }
