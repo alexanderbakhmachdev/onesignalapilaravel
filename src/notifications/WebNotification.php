@@ -19,8 +19,5 @@ class WebNotification extends Notification
         // TODO: Implement withConfig() method.
     }
 
-    public function sentPost()
-    {
-        // TODO: Implement sentPost() method.
-    }
+    //TODO: add functions that inject params suitable only for WebSites
 }

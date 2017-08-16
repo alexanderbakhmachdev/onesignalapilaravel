@@ -5,6 +5,7 @@ namespace Alexander\OneSignalApiLaravel;
 
 use Alexander\OneSignalApiLaravel\Notifications\AndroidNotification;
 use Alexander\OneSignalApiLaravel\Notifications\IosNotification;
+use Alexander\OneSignalApiLaravel\Notifications\Notification;
 use Alexander\OneSignalApiLaravel\Notifications\WebNotification;
 
 abstract class NotificationFactory

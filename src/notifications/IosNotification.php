@@ -18,8 +18,4 @@ class IosNotification extends Notification
         // TODO: Implement withConfig() method.
     }
 
-    public function sentPost()
-    {
-        // TODO: Implement sentPost() method.
-    }
 }

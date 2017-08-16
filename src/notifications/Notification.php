@@ -1,6 +1,12 @@
 <?php
 namespace Alexander\OneSignalApiLaravel\Notifications;
 
+use Alexander\OneSignalApiLaravel\Exceptions\OneSignalException;
+use Alexander\OneSignalApiLaravel\Exceptions\OneSignalRequestException;
+use Alexander\OneSignalApiLaravel\Filter\Filter;
+use GuzzleHttp\Exception\RequestException;
+use GuzzleHttp\Exception\TransferException;
+
 abstract class Notification
 {
 
@@ -104,6 +110,10 @@ abstract class Notification
         return $this;
     }
 
+    public function addFilter(Filter $filter){
+        $this->data['filters'] = $filter->data();
+    }
+
     /**
      * @return string
      * Get json representation of notification data
@@ -112,6 +122,36 @@ abstract class Notification
         return json_encode($this->data);
     }
 
-    public abstract function sentPost();
+    /**
+     * @return OneSignal response
+     * @throws OneSignalException
+     * @throws OneSignalRequestException
+     */
+    public function sentPost()
+    {
+        if(!preg_match( $this->_REGEXP_URL ,$this->apiUrl)){
+            throw new OneSignalException("Not valid url");
+        }
+        try {
+            dd($this->apiUrl, [
+                'headers' => $this->headers,
+                'body' => $this->getDataByJson()
+            ]);
+            return $this->client->post($this->apiUrl, [
+                'headers' => $this->headers,
+                'body' => $this->getDataByJson()
+            ]);
+        }catch (RequestException $e){
+            if ($e->hasResponse()) {
+                $errors = json_decode($e->getResponse()->getBody(), true)['errors'];
+                $exception = new OneSignalException($errors[0]);
+                $exception->errorMessages = $errors;
+                throw $exception;
+            }
+        }catch (TransferException $e){
+            throw new OneSignalRequestException($e->getMessage());
+        }
+        return null;
+    }
 
 }

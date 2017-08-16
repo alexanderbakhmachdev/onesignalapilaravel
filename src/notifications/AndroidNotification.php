@@ -2,11 +2,7 @@
 
 namespace Alexander\OneSignalApiLaravel\Notifications;
 
-use Alexander\OneSignalApiLaravel\Exceptions\OneSignalException;
-use Alexander\OneSignalApiLaravel\Exceptions\OneSignalRequestException;
 use GuzzleHttp\Client;
-use GuzzleHttp\Exception\RequestException;
-use GuzzleHttp\Exception\TransferException;
 
 class AndroidNotification extends Notification
 {
@@ -32,6 +28,7 @@ class AndroidNotification extends Notification
     /**
      * @param $config
      * @return $this
+     * Special configuration data to configure android notification
      */
     public function withConfig($config)
     {
@@ -46,31 +43,4 @@ class AndroidNotification extends Notification
         return $this;
     }
 
-    /**
-     * @return null
-     * @throws OneSignalException
-     * @throws OneSignalRequestException
-     */
-    public function sentPost()
-    {
-        if(!preg_match( $this->_REGEXP_URL ,$this->apiUrl)){
-            throw new OneSignalException("Not valid url");
-        }
-        try {
-            return $this->client->post($this->apiUrl, [
-                'headers' => $this->headers,
-                'body' => $this->getDataByJson()
-            ]);
-        }catch (RequestException $e){
-            if ($e->hasResponse()) {
-                $errors = json_decode($e->getResponse()->getBody(), true)['errors'];
-                $exception = new OneSignalException($errors[0]);
-                $exception->errorMessages = $errors;
-                throw $exception;
-            }
-        }catch (TransferException $e){
-            throw new OneSignalRequestException($e->getMessage());
-        }
-        return null;
-    }
 }
