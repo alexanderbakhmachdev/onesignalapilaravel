@@ -26,23 +26,23 @@ class Filter
         return new Filter();
     }
 
-    public function set(FilterField $filterField)
+    public function set($field)
     {
-        array_push($this->data,$filterField->data());
+        array_push($this->data,$field);
         return $this;
     }
 
-    public function addWithAnd(FilterField $filterField)
+    public function addWithAnd($field)
     {
         array_push($this->data, self::OPERATOR_OR);
-        array_push($this->data,$filterField->data());
+        array_push($this->data,$field);
         return $this;
     }
 
-    public function addWithOr(FilterField $filterField)
+    public function addWithOr($field)
     {
         array_push($this->data, self::OPERATOR_AND);
-        array_push($this->data,$filterField->data());
+        array_push($this->data,$field);
         return $this;
     }
 

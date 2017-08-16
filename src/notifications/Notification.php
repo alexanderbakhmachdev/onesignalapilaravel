@@ -112,6 +112,7 @@ abstract class Notification
 
     public function addFilter(Filter $filter){
         $this->data['filters'] = $filter->data();
+        return $this;
     }
 
     /**
@@ -133,10 +134,6 @@ abstract class Notification
             throw new OneSignalException("Not valid url");
         }
         try {
-            dd($this->apiUrl, [
-                'headers' => $this->headers,
-                'body' => $this->getDataByJson()
-            ]);
             return $this->client->post($this->apiUrl, [
                 'headers' => $this->headers,
                 'body' => $this->getDataByJson()

@@ -23,12 +23,12 @@ class FilterField
     }
 
     public function lastSession($relation, $hoursAgo){
-        array_push($this->data,[
+        return json_encode([
             'field' => 'last_session',
             'relation' => $relation,
             'hours_ago' => $hoursAgo,
         ]);
-        return $this;
+
     }
 
     public function firstSession($relation, $hoursAgo){
@@ -41,85 +41,76 @@ class FilterField
     }
 
     public function sessionCount($relation, $value){
-        array_push($this->data,[
+        return [
             'field' => 'session_count',
             'relation' => $relation,
             'value' => $value
-        ]);
-        return $this;
+        ];
     }
 
     public function sessionTime($relation, $value){
-        array_push($this->data,[
+       return [
            'field' => 'session_time',
            'relation' => $relation,
            'value' => $value
-        ]);
-        return $this;
+        ];
     }
 
     public function amount_spent($relation, $value){
-        array_push($this->data,[
+        return [
             'field' => 'amount_spent',
             'relation' => $relation,
             'value' => $value
-        ]);
-        return $this;
+        ];
     }
 
     public function bought_sku($relation, $key){
-        array_push($this->data,[
+        return [
             'field' => 'bought_sku',
             'relation' => $relation,
             'key' => $key
-        ]);
-        return $this;
+        ];
     }
 
     public function tag($relation, $key, $value){
-        array_push($this->data,[
+        return [
             'field' => 'tag',
             'relation' => $relation,
             'key' => $key,
             'value' => $value
-        ]);
-        return $this;
+        ];
     }
 
     public function language($relation, $value){
-        array_push($this->data, [
+        return [
             'field' => 'language',
             'relation' => $relation,
             'value' => $value
-        ]);
-        return $this;
+        ];
     }
 
     public function appVersion($relation, $value){
-        array_push($this->data, [
+        return [
            'field' => 'app_version',
            'relation' => $relation,
            'value' => $value
-        ]);
-        return $this;
+        ];
     }
 
     public function location($radius, $lat, $long){
-        array_push($this->data, [
+        return [
             'field' => 'location',
             'radius' => $radius,
             'lat' => $lat,
             'long' => $long
-        ]);
-        return $this;
+        ];
     }
 
     public function email($value){
-        array_push($this->data, [
+        return [
             'field' => 'email',
             'value' => $value
-        ]);
-        return $this;
+        ];
     }
 
     public function data(){
