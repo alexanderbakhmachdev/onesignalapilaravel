@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: alexandr
- * Date: 16.08.17
- * Time: 11:33
- */
+namespace Alexander\OneSignalApiLaravel\Notifications;
 
 class IosNotification extends Notification
 {

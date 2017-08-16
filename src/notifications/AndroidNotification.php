@@ -1,17 +1,12 @@
 <?php
 
+namespace Alexander\OneSignalApiLaravel\Notifications;
+
 use Alexander\OneSignalApiLaravel\Exceptions\OneSignalException;
 use Alexander\OneSignalApiLaravel\Exceptions\OneSignalRequestException;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\TransferException;
-
-/**
- * Created by PhpStorm.
- * User: alexandr
- * Date: 16.08.17
- * Time: 11:33
- */
 
 class AndroidNotification extends Notification
 {
