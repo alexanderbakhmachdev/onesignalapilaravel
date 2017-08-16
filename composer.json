@@ -17,5 +17,6 @@
         "psr-4": {
             "Alexander\\": "src/"
         }
-    }
+    },
+    "version": "1.0"
 }
