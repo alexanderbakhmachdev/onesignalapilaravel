@@ -45,7 +45,6 @@ class OneSignalNotification
         $this->data['included_segments'] = [];
         $this->data['contents'] = [];
         $this->data['filters'] = [];
-        $this->data['include_player_ids'] = array();
         array_merge($this->data, $addData);
     }
 
@@ -92,6 +91,8 @@ class OneSignalNotification
      * Warning! can not be combined with both forActiveUsers() and forInactiveUsers methods
      */
     public function addUsers($usersApiId){
+        if(!isset($this->data['include_player_ids']))
+            $this->data['include_player_ids'] = array();
         $this->data['include_player_ids'] = $usersApiId;
         return $this;
     }
@@ -102,6 +103,8 @@ class OneSignalNotification
      * Add userId to the array og users id in notification
      */
     public function addUser($userId){
+        if(!isset($this->data['include_player_ids']))
+            $this->data['include_player_ids'] = array();
         array_push($this->data['include_player_ids'], $userId);
         return $this;
     }
