@@ -2,6 +2,7 @@
 
 namespace Alexander\OneSignalApiLaravel;
 
+use Alexander\OneSignalApiLaravel\Notifications\Notification;
 use Illuminate\Support\ServiceProvider;
 
 class OneSignalServiceProvider extends ServiceProvider
@@ -33,7 +34,7 @@ class OneSignalServiceProvider extends ServiceProvider
             if (is_null($config)) {
                 $config = $app['config']['onesignal'] ?: $app['config']['onesignal::config'];
             }
-            return NotificationFactory::getNotification('android')->withConfig($config);
+            return Notification::getPrototype()->withConfig($config);
         });
     }
 }

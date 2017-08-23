@@ -25,22 +25,5 @@ class AndroidNotification extends Notification
         return new AndroidNotification($addData);
     }
 
-    /**
-     * @param $config
-     * @return $this
-     * Special configuration data to configure android notification
-     */
-    public function withConfig($config)
-    {
-        $this->apiUrl = $config['api_url'];
-        $this->restApiKey = $config['rest_api_key'];
-        $this->oneSignalAppId = $config['rest_signal_api_id'];
-        $this->headers = [
-            'Content-Type' => 'application/json; charset=utf-8',
-            'Authorization' => 'Basic' . ' ' . $this->restApiKey
-        ];
-        $this->data['app_id'] = $this->oneSignalAppId;
-        return $this;
-    }
 
 }

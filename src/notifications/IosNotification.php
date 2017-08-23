@@ -13,9 +13,6 @@ class IosNotification extends Notification
         return new IosNotification($addData);
     }
 
-    public function withConfig($config)
-    {
-        // TODO: Implement withConfig() method.
-    }
+
 
 }

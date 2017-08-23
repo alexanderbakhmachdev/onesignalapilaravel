@@ -14,10 +14,5 @@ class WebNotification extends Notification
         return new WebNotification($addData);
     }
 
-    public function withConfig($config)
-    {
-        // TODO: Implement withConfig() method.
-    }
 
-    //TODO: add functions that inject params suitable only for WebSites
 }

@@ -4,10 +4,11 @@ namespace Alexander\OneSignalApiLaravel\Notifications;
 use Alexander\OneSignalApiLaravel\Exceptions\OneSignalException;
 use Alexander\OneSignalApiLaravel\Exceptions\OneSignalRequestException;
 use Alexander\OneSignalApiLaravel\Filter\Filter;
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\TransferException;
 
-abstract class Notification
+class Notification
 {
 
     protected $data;
@@ -24,7 +25,63 @@ abstract class Notification
 
     protected $client;
 
-    public abstract function withConfig($config);
+
+
+    /**
+     * AndroidNotification constructor.
+     * @param $addData
+     */
+    private function __construct($addData)
+    {
+
+        $this->client = new Client();
+        $this->data['included_segments'] = [];
+        $this->data['contents'] = [];
+        $this->data['filters'] = [];
+        $this->data['include_player_ids'] = array();
+        array_merge($this->data, $addData);
+    }
+
+    public static function getPrototype($addData = []){
+        return new Notification($addData);
+    }
+
+
+    /**
+     * Factory method
+     * @param $type
+     * @param $data
+     * can take value of android, ios or web
+     *
+     * @return Notification
+     */
+    public function getSpecializedPrototype($type){
+        if($type == 'android')
+            return AndroidNotification::createInstance($this->data);
+        if($type == 'web')
+            return WebNotification::createInstance($this->data);
+        if($type == 'ios')
+            return IosNotification::createInstance($this->data);
+        else
+            return null;
+    }
+
+    /**
+     * @param $config
+     * @return $this
+     */
+    public function withConfig($config)
+    {
+        $this->apiUrl = $config['api_url'];
+        $this->restApiKey = $config['rest_api_key'];
+        $this->oneSignalAppId = $config['rest_signal_api_id'];
+        $this->headers = [
+            'Content-Type' => 'application/json; charset=utf-8',
+            'Authorization' => 'Basic' . ' ' . $this->restApiKey
+        ];
+        $this->data['app_id'] = $this->oneSignalAppId;
+        return $this;
+    }
 
     /**
      * @return $this
