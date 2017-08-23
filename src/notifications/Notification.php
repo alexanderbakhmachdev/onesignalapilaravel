@@ -57,11 +57,11 @@ class Notification
      */
     public function getSpecializedPrototype($type){
         if($type == 'android')
-            return AndroidNotification::createInstance($this->data);
+            return new AndroidNotification($this->data);
         if($type == 'web')
-            return WebNotification::createInstance($this->data);
+            return new WebNotification($this->data);
         if($type == 'ios')
-            return IosNotification::createInstance($this->data);
+            return new IosNotification($this->data);
         else
             return null;
     }
